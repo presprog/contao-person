@@ -70,7 +70,7 @@ class PersonList extends Module
             $this->person_archiv, array('order' => 'sorting ASC')
         );
         $size = deserialize($this->imgSize);
-        $html = '';
+        $people = [];
         if ($person) {
             while ($person->next()) {
                 $template = new FrontendTemplate($this->strTemplatePerson);
@@ -81,11 +81,11 @@ class PersonList extends Module
                 if ($data['singleSRC'] !== null) {
                     Controller::addImageToTemplate($template, $data);
                 }
-                $html .= $template->parse();
+                $people[] = $template->parse();
             }
         }
 
-        $this->Template->strPeople = $html;
+        $this->Template->people = $people;
     }
 
     /**
